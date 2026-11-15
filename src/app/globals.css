@@ -1,11 +1,53 @@
 @import "tailwindcss";
 
+/* Light is the base. Dark overrides the same five raw values below, so every
+   utility that references them flips without a second set of classes. */
+:root {
+  --bg: #ffffff;
+  --fg: #0a0a0a;
+  --muted: #9a9a9a;
+  --subtle: #f4f4f4;
+  --line: #e6e6e6;
+  --select-bg: #0a0a0a;
+  --select-fg: #ffffff;
+  --scroll-thumb: #dcdcdc;
+  color-scheme: light;
+}
+
+/* System preference, unless the visitor has explicitly chosen light. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d0d0d;
+    --fg: #f2f2f2;
+    --muted: #7d7d7d;
+    --subtle: #1a1a1a;
+    --line: #262626;
+    --select-bg: #f2f2f2;
+    --select-fg: #0d0d0d;
+    --scroll-thumb: #2e2e2e;
+    color-scheme: dark;
+  }
+}
+
+/* Explicit choice always wins over the system setting. */
+:root[data-theme="dark"] {
+  --bg: #0d0d0d;
+  --fg: #f2f2f2;
+  --muted: #7d7d7d;
+  --subtle: #1a1a1a;
+  --line: #262626;
+  --select-bg: #f2f2f2;
+  --select-fg: #0d0d0d;
+  --scroll-thumb: #2e2e2e;
+  color-scheme: dark;
+}
+
 @theme inline {
-  --color-background: #ffffff;
-  --color-foreground: #0a0a0a;
-  --color-muted: #9a9a9a;
-  --color-subtle: #f4f4f4;
-  --color-line: #e6e6e6;
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-line: var(--line);
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
@@ -18,32 +60,81 @@ html {
 }
 
 body {
-  background: var(--color-background);
-  color: var(--color-foreground);
+  background: var(--bg);
+  color: var(--fg);
   font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ::selection {
-  background: #0a0a0a;
-  color: #ffffff;
+  background: var(--select-bg);
+  color: var(--select-fg);
 }
 
-/* Thin, quiet scrollbar to match the layout */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #dcdcdc;
+  background: var(--scroll-thumb);
   border-radius: 999px;
-  border: 3px solid #ffffff;
+  border: 3px solid var(--bg);
 }
 ::-webkit-scrollbar-track {
-  background: #ffffff;
+  background: var(--bg);
+}
+
+/* Per-project placeholder colour. The hex set in Sanity is tuned for a white
+   page, so in dark mode it falls back to the neutral dark surface instead. */
+.tone {
+  background-color: var(--tone, #efefef);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .tone {
+    background-color: var(--subtle);
+  }
+}
+
+:root[data-theme="dark"] .tone {
+  background-color: var(--subtle);
+}
+
+/* Which half of the segmented toggle reads as selected. */
+.seg-light {
+  background: var(--fg);
+  color: var(--bg);
+}
+.seg-dark {
+  background: transparent;
+  color: var(--muted);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .seg-light {
+    background: transparent;
+    color: var(--muted);
+  }
+  :root:not([data-theme="light"]) .seg-dark {
+    background: var(--fg);
+    color: var(--bg);
+  }
+}
+
+:root[data-theme="dark"] .seg-light {
+  background: transparent;
+  color: var(--muted);
+}
+:root[data-theme="dark"] .seg-dark {
+  background: var(--fg);
+  color: var(--bg);
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  body {
+    transition: none;
   }
 }

@@ -36,11 +36,11 @@ export default async function PortfolioPage() {
               <p className="font-heading text-[clamp(2rem,6vw,4.5rem)] leading-[0.95] font-semibold tracking-tight">
                 Portfolio
               </p>
-              <p className="font-heading text-[clamp(2rem,6vw,4.5rem)] leading-[0.95] font-semibold tracking-tight text-black/15">
+              <p className="font-heading text-[clamp(2rem,6vw,4.5rem)] leading-[0.95] font-semibold tracking-tight text-foreground/15">
                 2026
               </p>
               {settings?.role && (
-                <p className="mt-6 font-sans text-sm tracking-wide text-black/60">
+                <p className="mt-6 font-sans text-sm tracking-wide text-foreground/60">
                   {settings.role}
                 </p>
               )}

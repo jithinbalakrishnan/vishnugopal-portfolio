@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
+import ThemeScript from "@/components/ThemeScript";
 import { getSettings } from "@/sanity/data";
 
 const inter = Inter({
@@ -36,7 +37,11 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${poppins.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        <ThemeScript />
+      </head>
       {/* Browser extensions (Grammarly et al.) inject attributes on <body>,
           which React otherwise reports as a hydration mismatch. */}
       <body

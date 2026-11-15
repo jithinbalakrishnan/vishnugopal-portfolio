@@ -41,8 +41,8 @@ export default function CoverImage({
 
   return (
     <div
-      style={{ aspectRatio: ratio, backgroundColor: tone }}
-      className={`relative w-full overflow-hidden ${className}`}
+      style={{ aspectRatio: ratio, "--tone": tone } as React.CSSProperties}
+      className={`tone relative w-full overflow-hidden ${className}`}
     >
       <Image
         src={urlFor(image).width(width).height(height).fit("crop").url()}

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { nav } from "@/lib/content";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Header({ name }: { name: string }) {
   const pathname = usePathname();
@@ -30,7 +31,7 @@ export default function Header({ name }: { name: string }) {
 
   return (
     <header
-      className={`sticky top-0 z-50 bg-white/85 backdrop-blur-md transition-[border-color,box-shadow] duration-300 ${
+      className={`sticky top-0 z-50 bg-background/85 backdrop-blur-md transition-[border-color,box-shadow] duration-300 ${
         scrolled ? "border-b border-line" : "border-b border-transparent"
       }`}
     >
@@ -62,14 +63,18 @@ export default function Header({ name }: { name: string }) {
               />
             </Link>
           ))}
+          <span className="h-4 w-px bg-line" aria-hidden="true" />
+          <ThemeToggle />
         </nav>
 
-        <button
+        <div className="flex items-center gap-4 md:hidden">
+          <ThemeToggle />
+          <button
           type="button"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="flex h-8 w-8 flex-col items-end justify-center gap-[5px] md:hidden"
+          className="flex h-8 w-8 flex-col items-end justify-center gap-[5px]"
         >
           <span
             className={`block h-px bg-foreground transition-all duration-300 ${
@@ -81,7 +86,8 @@ export default function Header({ name }: { name: string }) {
               open ? "w-5 -translate-y-[3px] -rotate-45" : "w-3.5"
             }`}
           />
-        </button>
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -92,7 +98,7 @@ export default function Header({ name }: { name: string }) {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden border-t border-line bg-white md:hidden"
+            className="overflow-hidden border-t border-line bg-background md:hidden"
           >
             <nav className="flex flex-col px-6 py-6">
               {nav.map((item, i) => (

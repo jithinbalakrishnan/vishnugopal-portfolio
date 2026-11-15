@@ -22,18 +22,21 @@ export default function Frame({
   className = "",
   rounded = false,
 }: FrameProps) {
-  const style: CSSProperties = { aspectRatio: ratio, backgroundColor: tone };
+  const style = {
+    aspectRatio: ratio,
+    "--tone": tone,
+  } as CSSProperties;
 
   return (
     <div
       style={style}
-      className={`relative w-full overflow-hidden ${
+      className={`tone relative w-full overflow-hidden ${
         rounded ? "rounded-sm" : ""
       } ${className}`}
     >
       {label !== null && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="font-heading text-[10px] tracking-[0.3em] text-black/25 uppercase">
+          <span className="font-heading text-[10px] tracking-[0.3em] text-foreground/25 uppercase">
             {label ?? "Image"}
           </span>
         </div>
