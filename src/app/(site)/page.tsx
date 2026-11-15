@@ -28,7 +28,12 @@ export default async function Home() {
 
       {/* Intro line + bio */}
       <section className="mx-auto max-w-[1400px] px-6 pt-16 md:px-10 md:pt-24 lg:px-16">
-        <h1 className="max-w-[22ch] font-heading text-[clamp(2rem,6vw,4.25rem)] leading-[1.08] font-medium tracking-tight">
+        {/* Two size curves. Below md the text scales with the viewport so
+            "Hello, I'm Vishnu Gopal" always fits one line — a fixed minimum
+            here is what used to split the name on a phone. The cap of 2.75rem
+            lands within 2px of what the md curve starts at, so the handover at
+            the breakpoint is invisible. */}
+        <h1 className="max-w-[22ch] font-heading text-[clamp(1.5rem,7.2vw,2.75rem)] leading-[1.08] font-medium tracking-tight md:text-[clamp(2rem,6vw,4.25rem)]">
           {settings?.heroLead && (
             <WordReveal text={settings.heroLead} delay={0.1} />
           )}{" "}

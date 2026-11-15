@@ -18,7 +18,7 @@ export default async function ContactPage() {
   return (
     <div className="mx-auto max-w-[1400px] px-6 pt-24 md:px-10 md:pt-40 lg:px-16">
       <Reveal>
-        <h1 className="max-w-[18ch] font-heading text-[clamp(1.75rem,4.5vw,3rem)] leading-[1.2] font-medium tracking-tight break-words md:break-normal">
+        <h1 className="max-w-[18ch] font-heading text-[clamp(1.75rem,4.5vw,3rem)] leading-[1.2] font-medium tracking-tight [overflow-wrap:anywhere] md:[overflow-wrap:normal]">
           If you&rsquo;re interested in any form of collaboration, drop a line at{" "}
           {settings?.email && (
             <a
