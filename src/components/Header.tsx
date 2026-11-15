@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { nav } from "@/lib/content";
 import ThemeToggle from "@/components/ThemeToggle";
+import Logo from "@/components/Logo";
 
 export default function Header({ name }: { name: string }) {
   const pathname = usePathname();
@@ -39,9 +40,10 @@ export default function Header({ name }: { name: string }) {
         <Link
           href="/"
           onClick={() => setOpen(false)}
-          className="font-heading text-[15px] font-semibold tracking-tight md:text-[17px]"
+          className="flex items-center gap-2.5 font-heading text-[15px] font-semibold tracking-tight md:gap-3 md:text-[17px]"
         >
-          {name}
+          <Logo size={22} className="shrink-0 md:h-6 md:w-6" />
+          <span>{name}</span>
         </Link>
 
         <nav className="hidden items-center gap-10 md:flex">

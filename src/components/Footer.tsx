@@ -20,7 +20,7 @@ export default function Footer({ settings }: { settings: SiteSettings | null }) 
               </p>
 
               {email && (
-                <h2 className="mt-5 font-heading text-[clamp(1.75rem,5vw,3.25rem)] leading-[1.1] font-medium tracking-tight">
+                <h2 className="mt-5 font-heading text-[clamp(1.5rem,5vw,3.25rem)] leading-[1.1] font-medium tracking-tight break-words">
                   <a
                     href={`mailto:${email}`}
                     className="inline-block transition-opacity hover:opacity-50"
